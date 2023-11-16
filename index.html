@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento App</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div>
+    <p>Orçamento R$ <span id="orcamento">0,00</span> - <span id="porcentagem">0%</span></p>
+    <button onclick="adicionarOrcamento()">Adicionar Orçamento</button>
+  </div>
+
+  <!-- Meses -->
+  <div>
+    <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
+  </div>
+
+  <div>
+    <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Março')">Março - <span id="porcentagemMarço">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Abril')">Abril - <span id="porcentagemAbril">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Maio')">Maio - <span id="porcentagemMaio">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Junho')">Junho - <span id="porcentagemJunho">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Julho')">Julho - <span id="porcentagemJulho">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Agosto')">Agosto - <span id="porcentagemAgosto">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Setembro')">Setembro - <span id="porcentagemSetembro">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Outubro')">Outubro - <span id="porcentagemOutubro">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
+  </div>
+  <div>
+    <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
+  </div>
+  <!-- Adicione os demais meses aqui... -->
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <h2 id="mesSelecionado"></h2>
+    <label for="item">Item:</label>
+    <input type="text" id="item" placeholder="Nome do Item">
+    <br>
+    <label for="valor">Valor:</label>
+    <input type="number" id="valor" placeholder="Valor do Item">
+    <br>
+    <button onclick="adicionarItem()">Adicionar</button>
+    <button onclick="fecharModal()">Fechar</button>
+    <ul id="listaItensModal"></ul>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+
+</body>
+</html>
