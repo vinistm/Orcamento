@@ -17,7 +17,6 @@
   <div>
     <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
   </div>
-
   <div>
     <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
   </div>
@@ -48,11 +47,39 @@
   <div>
     <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
   </div>
+
   <div>
     <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
   </div>
+ 
   <!-- Adicione os demais meses aqui... -->
 
+  
+  <div>
+    <button onclick="compararJaneiroFevereiro()">Comparar Janeiro e Fevereiro</button>
+    <div id="comparacaoJaneiroFevereiro"></div>
+    <button onclick="compararFevereiroMarco()">Comparar Fevereiro e Março</button>
+    <div id="comparacaoFevereiroMarco"></div>
+    <button onclick="compararMarcoAbril()">Comparar  Março e Abril</button>
+    <div id="comparacaoMarcoAbril"></div>
+    <button onclick="compararAbrilMaio()">Comparar  Abril e Maio</button>
+    <div id="comparacaoAbrilMaio"></div>
+    <button onclick="compararMaioJunho()">Comparar  Maio e Junho</button>
+    <div id="comparacaoMaioJunho"></div>
+    <button onclick="compararJunhoJulho()">Comparar Junho e Julho</button>
+    <div id="comparacaoJunhoJulho"></div>
+    <button onclick="compararJulhoAgosto()">Comparar Julho e Agosto</button>
+    <div id="comparacaoJulhoAgosto"></div>
+    <button onclick="compararAgostoSetembro()">Comparar Agosto e Setembro</button>
+    <div id="comparacaoAgostoSetembro"></div>
+    <button onclick="compararSetembroOutubro()">Comparar Setembro e Outubro</button>
+    <div id="comparacaoSetembroOutubro"></div>
+    <button onclick="compararOutubroNovembro()">Comparar Outubro e Novembro</button>
+    <div id="comparacaoOutubroNovembro"></div>
+    <button onclick="compararNovembroDezembro()">Comparar Novembro e Dezembro</button>
+    <div id="comparacaoNovembroDezembro"></div>
+  </div>
+  
   <!-- Modal -->
   <div id="myModal" class="modal">
     <h2 id="mesSelecionado"></h2>
@@ -66,6 +93,9 @@
     <button onclick="fecharModal()">Fechar</button>
     <ul id="listaItensModal"></ul>
   </div>
+
+
+
 
   <!-- Script -->
   <script src="script.js"></script>
