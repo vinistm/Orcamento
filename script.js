@@ -31,7 +31,8 @@ let orcamentoTotal = 0;
 
     function abrirModal(mes) {
       mesSelecionado = mes;
-
+      document.body.classList.add('modal-open');
+      document.getElementById('myModal').style.display = 'block';
       if (!orcamentoPorMes[mes]) {
         orcamentoPorMes[mes] = {
           orcamentoMes: orcamentoTotal,
@@ -41,8 +42,6 @@ let orcamentoTotal = 0;
       }
 
       atualizarPorcentagemMes(mes);
-      document.getElementById('myModal').style.display = 'block';
-      document.getElementById('mesSelecionado').innerText = mes;
       exibirItensDoMes(mes);
     }
 
@@ -104,52 +103,14 @@ let orcamentoTotal = 0;
       });
     }
 
-    function compararJaneiroFevereiro() {
-      document.getElementById('comparacaoJaneiroFevereiro').innerText = calcularDiferencaPorcentagens('Janeiro', 'Fevereiro') + '%';
+    function compararMesesSelecionados() {
+      const mes1 = document.getElementById('mes1').value;
+      const mes2 = document.getElementById('mes2').value;
+    
+      const resultadoComparacao = calcularDiferencaPorcentagens(mes1, mes2);
+      document.getElementById('resultadoComparacao').innerText = resultadoComparacao + '%';
     }
     
-    function compararFevereiroMarco() {
-      document.getElementById('comparacaoFevereiroMarco').innerText = calcularDiferencaPorcentagens('Fevereiro', 'Março') + '%';
-    }
-
-    function compararFevereiroMarco() {
-      document.getElementById('comparacaoFevereiroMarco').innerText = calcularDiferencaPorcentagens('Fevereiro', 'Março') + '%';
-    }
-
-function compararMarcoAbril() {
-      document.getElementById('comparacaoMarcoAbril').innerText = calcularDiferencaPorcentagens('Março','Abril') + '%';
-    }
-
-function compararAbrilMaio() {
-      document.getElementById('comparacaoAbrilMaio').innerText = calcularDiferencaPorcentagens('Abril','Maio') + '%';
-    }
-
-function compararMaioJunho() {
-      document.getElementById('comparacaoMaioJunho').innerText = calcularDiferencaPorcentagens('Maio','Junho') + '%';
-    }
-
-function compararJunhoJulho() {
-      document.getElementById('comparacaoJunhoJulho').innerText = calcularDiferencaPorcentagens('Junho','Julho') + '%';
-    }
-
-function compararJulhoAgosto() {
-      document.getElementById('comparacaoJulhoAgosto').innerText = calcularDiferencaPorcentagens('Julho','Agosto') + '%';
-    }
-
-function compararAgostoSetembro() {
-      document.getElementById('comparacaoAgostoSetembro').innerText = calcularDiferencaPorcentagens('Agosto','Setembro') + '%';
-    }
-
-function compararSetembroOutubro() {
-      document.getElementById('comparacaoSetembroOutubro').innerText = calcularDiferencaPorcentagens('Setembro','Outubro') + '%';
-    }
-
-function compararOutubroNovembro() {
-      document.getElementById('comparacaoOutubroNovembro').innerText = calcularDiferencaPorcentagens('Outubro','Novembro') + '%';
-    }
-function compararNovembroDezembro() {
-      document.getElementById('comparacaoNovembroDezembro').innerText = calcularDiferencaPorcentagens('Novembro','Dezembro') + '%';
-    }
   
 
     function exibirItensDoMes(mes) {
@@ -179,7 +140,7 @@ function compararNovembroDezembro() {
       orcamentoAtual -= valorItemExcluido;
       orcamentoPorMes[mesSelecionado].orcamentoAtualMes -= valorItemExcluido;
       orcamentoPorMes[mesSelecionado].itens.splice(itemIndex, 1);
-
+     
       atualizarPorcentagemMes(mesSelecionado);
       exibirItensDoMes(mesSelecionado);
       atualizarPorcentagemTotal();

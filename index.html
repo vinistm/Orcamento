@@ -4,102 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orçamento App</title>
-   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div>
-    <p>Orçamento R$ <span id="orcamento">0,00</span> - <span id="porcentagem">0%</span></p>
-    <button onclick="adicionarOrcamento()">Adicionar Orçamento</button>
-   
+  <div class="header">
+    <div class="orc">
+      <p>Orçamento</p> <span id="orcamento">0,00</span> 
+    </div>
+      <div>
+<p>Porcentagem</p>
+       <span id="porcentagem">0%</span></div>
+    <button class="orca" onclick="adicionarOrcamento()">+</button>
   </div>
 
   <!-- Meses -->
-  <div>
+  <div class="meses">
+
+  
+  <div id='select'>
     <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Março')">Março - <span id="porcentagemMarço">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Abril')">Abril - <span id="porcentagemAbril">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Maio')">Maio - <span id="porcentagemMaio">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Junho')">Junho - <span id="porcentagemJunho">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Julho')">Julho - <span id="porcentagemJulho">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Agosto')">Agosto - <span id="porcentagemAgosto">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Setembro')">Setembro - <span id="porcentagemSetembro">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Outubro')">Outubro - <span id="porcentagemOutubro">0%</span></p>
   </div>
-  <div>
+  <div id='select'>
     <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
   </div>
 
   <div>
     <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
   </div>
- 
-  <!-- Adicione os demais meses aqui... -->
+ </div>
+  <!-- Adicione os outros meses aqui... -->
 
-  
-  <div>
-    <button onclick="compararJaneiroFevereiro()">Comparar Janeiro e Fevereiro</button>
-    <div id="comparacaoJaneiroFevereiro"></div>
-    <button onclick="compararFevereiroMarco()">Comparar Fevereiro e Março</button>
-    <div id="comparacaoFevereiroMarco"></div>
-    <button onclick="compararMarcoAbril()">Comparar  Março e Abril</button>
-    <div id="comparacaoMarcoAbril"></div>
-    <button onclick="compararAbrilMaio()">Comparar  Abril e Maio</button>
-    <div id="comparacaoAbrilMaio"></div>
-    <button onclick="compararMaioJunho()">Comparar  Maio e Junho</button>
-    <div id="comparacaoMaioJunho"></div>
-    <button onclick="compararJunhoJulho()">Comparar Junho e Julho</button>
-    <div id="comparacaoJunhoJulho"></div>
-    <button onclick="compararJulhoAgosto()">Comparar Julho e Agosto</button>
-    <div id="comparacaoJulhoAgosto"></div>
-    <button onclick="compararAgostoSetembro()">Comparar Agosto e Setembro</button>
-    <div id="comparacaoAgostoSetembro"></div>
-    <button onclick="compararSetembroOutubro()">Comparar Setembro e Outubro</button>
-    <div id="comparacaoSetembroOutubro"></div>
-    <button onclick="compararOutubroNovembro()">Comparar Outubro e Novembro</button>
-    <div id="comparacaoOutubroNovembro"></div>
-    <button onclick="compararNovembroDezembro()">Comparar Novembro e Dezembro</button>
-    <div id="comparacaoNovembroDezembro"></div>
-  </div>
-  
-  <!-- Modal -->
+  <!-- Formulário para escolher os meses de comparação -->
+  <form id="formComparacao">
+    <label for="mes1">Escolha o primeiro mês:</label>
+    <select id="mes1" name="mes1">
+      <option value="Janeiro">Janeiro</option>
+      <option value="Fevereiro">Fevereiro</option>
+      <option value="Março">Março</option>
+      <option value="Abril">Abril</option>
+      <option value="Maio">Maio</option>
+      <option value="Junho">Junho</option>
+      <option value="Julho">Julho</option>
+      <option value="Agosto">Agosto</option>
+      <option value="Setembro">Setembro</option>
+      <option value="Outubro">Outubro</option>
+      <option value="Novembro">Novembro</option>
+      <option value="Dezembro">Dezembro</option>
+    </select>
+    <label for="mes2">Escolha o segundo mês:</label>
+    <select id="mes2" name="mes2">
+      <option value="Janeiro">Janeiro</option>
+      <option value="Fevereiro">Fevereiro</option>
+      <option value="Março">Março</option>
+      <option value="Abril">Abril</option>
+      <option value="Maio">Maio</option>
+      <option value="Junho">Junho</option>
+      <option value="Julho">Julho</option>
+      <option value="Agosto">Agosto</option>
+      <option value="Setembro">Setembro</option>
+      <option value="Outubro">Outubro</option>
+      <option value="Novembro">Novembro</option>
+      <option value="Dezembro">Dezembro</option>
+    </select>
+
+    <button class="compa" type="button" onclick="compararMesesSelecionados()">Comparar Meses</button>
+    <div id="resultadoComparacao"></div>
+  </form>
+
+
   <div id="myModal" class="modal">
+  <div class="modal-content">
+
     <h2 id="mesSelecionado"></h2>
-    <label for="item">Item:</label>
-    <input type="text" id="item" placeholder="Nome do Item">
-    <br>
-    <label for="valor">Valor:</label>
-    <input type="number" id="valor" placeholder="Valor do Item">
-    <br>
-    <button onclick="adicionarItem()">Adicionar</button>
-    <button onclick="fecharModal()">Fechar</button>
+    <button class="modalfechar" onclick="fecharModal()">x</button>
+    <div class="itens-add">
+      <label for="item">Item:</label>
+      <input type="text" id="item" placeholder="Nome do Item">
+      <br>
+      <label for="valor">Valor:</label>
+      <input type="number" id="valor" placeholder="Valor do Item">
+      <br>
+      <button class="add" onclick="adicionarItem()">+</button>
+    </div>
+    <div>
+
+    </div>
     <ul id="listaItensModal"></ul>
   </div>
+  </div>
 
-
-
-
-  <!-- Script -->
   <script src="script.js"></script>
-
 </body>
 </html>
