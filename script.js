@@ -71,29 +71,39 @@ let orcamentoTotal = 0;
         exibirItensDoMes(mesSelecionado);
         atualizarPorcentagemMes(mesSelecionado);
         atualizarPorcentagemTotal();
-        
+        salvarItensLocalStorage();
+        salvarDadosLocalStorage();
       } else {
         alert("O valor do item excede o orçamento disponível.");
       }
     }
-
-   /* function atualizarComparacoes() {
-      const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    
-      for (let i = 0; i < meses.length; i++) {
-        for (let j = i + 1; j < meses.length; j++) {
-          const mes1 = meses[i];
-          const mes2 = meses[j];
-          const diferenca = calcularDiferencaPorcentagens(mes1, mes2);
-    
-          const divComparacao = document.getElementById(`comparacao${mes1}${mes2}`);
-          if (divComparacao) {
-            divComparacao.innerText = `${mes1} - ${mes2}: ${diferenca}%`;
-          }
-        }
-      }
+    function salvarItensLocalStorage() {
+      localStorage.setItem('itensPorMes', JSON.stringify(orcamentoPorMes));
     }
-*/
+
+
+    function carregarDadosLocalStorage() {
+      orcamentoTotal = parseFloat(localStorage.getItem('orcamentoTotal')) || 0;
+      orcamentoAtual = parseFloat(localStorage.getItem('orcamentoAtual')) || 0;
+      const orcamentoPorMesString = localStorage.getItem('orcamentoPorMes');
+      orcamentoPorMes = orcamentoPorMesString ? JSON.parse(orcamentoPorMesString) : {};
+    
+      // Carregue os itens do armazenamento local
+      const itensPorMesString = localStorage.getItem('itensPorMes');
+      const itensPorMes = itensPorMesString ? JSON.parse(itensPorMesString) : {};
+      Object.keys(itensPorMes).forEach(mes => {
+        if (!orcamentoPorMes[mes]) {
+          orcamentoPorMes[mes] = {
+            orcamentoMes: orcamentoTotal,
+            orcamentoAtualMes: 0,
+            itens: []
+          };
+        }
+        // Atualize os itens do mês com os itens salvos
+        orcamentoPorMes[mes].itens = itensPorMes[mes].itens;
+      });
+    }
+
     function compararJaneiroFevereiro() {
       document.getElementById('comparacaoJaneiroFevereiro').innerText = calcularDiferencaPorcentagens('Janeiro', 'Fevereiro') + '%';
     }
@@ -196,13 +206,6 @@ function compararNovembroDezembro() {
       localStorage.setItem('orcamentoTotal', orcamentoTotal);
       localStorage.setItem('orcamentoAtual', orcamentoAtual);
       localStorage.setItem('orcamentoPorMes', JSON.stringify(orcamentoPorMes));
-    }
-
-    function carregarDadosLocalStorage() {
-      orcamentoTotal = parseFloat(localStorage.getItem('orcamentoTotal')) || 0;
-      orcamentoAtual = parseFloat(localStorage.getItem('orcamentoAtual')) || 0;
-      const orcamentoPorMesString = localStorage.getItem('orcamentoPorMes');
-      orcamentoPorMes = orcamentoPorMesString ? JSON.parse(orcamentoPorMesString) : {};
     }
 
     function calcularDiferencaPorcentagens(mes1, mes2) {
