@@ -11,8 +11,6 @@ let orcamentoTotal = 0;
     function adicionarOrcamento() {
       const valor = parseFloat(prompt("Informe o valor do orçamento:")) || 0;
       orcamentoTotal = valor;
-      orcamentoAtual = 0;
-      orcamentoPorMes = {};
       atualizarOrcamento();
       atualizarPorcentagemTotal();
       
@@ -48,12 +46,24 @@ let orcamentoTotal = 0;
     function adicionarItem() {
       const item = document.getElementById('item').value;
       let valorRaw = document.getElementById('valor').value;
-      valorRaw = valorRaw.replace(/\\/g, '');
+    
+      // Remova caracteres não numéricos do valor
+      valorRaw = valorRaw.replace(/[^\d.,-]/g, '');
+    
+      // Substitua vírgulas por pontos para garantir a formatação correta como número
+      valorRaw = valorRaw.replace(',', '.');
+    
+      // Parse do valor para um número
       const valor = parseFloat(valorRaw) || 0;
-
+    
+      if (isNaN(valor)) {
+        alert("Por favor, insira um valor numérico para o item.");
+        return;
+      }
+    
       if (valor <= (orcamentoTotal - orcamentoAtual)) {
         orcamentoAtual += valor;
-
+    
         if (!orcamentoPorMes[mesSelecionado]) {
           orcamentoPorMes[mesSelecionado] = {
             orcamentoMes: orcamentoTotal,
@@ -61,12 +71,12 @@ let orcamentoTotal = 0;
             itens: []
           };
         }
-
+    
         orcamentoPorMes[mesSelecionado].orcamentoAtualMes += valor;
         orcamentoPorMes[mesSelecionado].itens.push({ nome: item, valor });
         document.getElementById('item').value = '';
         document.getElementById('valor').value = '';
-
+    
         exibirItensDoMes(mesSelecionado);
         atualizarPorcentagemMes(mesSelecionado);
         atualizarPorcentagemTotal();
@@ -76,6 +86,7 @@ let orcamentoTotal = 0;
         alert("O valor do item excede o orçamento disponível.");
       }
     }
+    
     function salvarItensLocalStorage() {
       localStorage.setItem('itensPorMes', JSON.stringify(orcamentoPorMes));
     }
@@ -165,25 +176,43 @@ let orcamentoTotal = 0;
       atualizarPorcentagemMes(mesSelecionado);
       exibirItensDoMes(mesSelecionado);
       atualizarPorcentagemTotal();
+      salvarItensLocalStorage();
+      salvarDadosLocalStorage();
       
     }
 
     function atualizarPorcentagemMes(mes) {
-      const porcentagemMes = ((orcamentoPorMes[mes].orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2);
-      document.getElementById(`porcentagem${mes}`).innerText = porcentagemMes + '%';
+      if (orcamentoPorMes[mes]) {
+        const porcentagemMes = ((orcamentoPorMes[mes].orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2);
+        document.getElementById(`porcentagem${mes}`).innerText = porcentagemMes + '%';
+      }
     }
-
     function atualizarOrcamento() {
       const orcamentoFormatado = orcamentoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       document.getElementById('orcamento').innerText = orcamentoFormatado;
+    
+      Object.keys(orcamentoPorMes).forEach(mes => {
+        orcamentoPorMes[mes].orcamentoMes = orcamentoTotal;
+      });
+    
       atualizarPorcentagemTotal();
     }
 
     function atualizarPorcentagemTotal() {
       const porcentagemTotal = ((orcamentoAtual / orcamentoTotal) * 100).toFixed(2);
       document.getElementById('porcentagem').innerText = porcentagemTotal + '%';
+    
+      const porcentagemFloat = parseFloat(porcentagemTotal);
+      const porcentagemElement = document.getElementById('porcentagem');
+    
+      if (porcentagemFloat <= 70) {
+        porcentagemElement.style.color = 'green';
+      } else if (porcentagemFloat > 70 && porcentagemFloat <= 90) {
+        porcentagemElement.style.color = 'orange';
+      } else {
+        porcentagemElement.style.color = 'red';
+      }
     }
-
     function salvarDadosLocalStorage() {
       localStorage.setItem('orcamentoTotal', orcamentoTotal);
       localStorage.setItem('orcamentoAtual', orcamentoAtual);
