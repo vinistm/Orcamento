@@ -128,6 +128,27 @@ let orcamentoTotal = 0;
         listaItensModal.appendChild(liModal);
       });
     }
+    function alternarMostrarPorcentagens() {
+      const btnMostrarPorcentagens = document.getElementById('btnMostrarPorcentagens');
+      const meses = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+    
+      if (btnMostrarPorcentagens.innerText === 'Mostrar') {
+        meses.forEach(mes => {
+          atualizarPorcentagemMes(mes);
+        });
+        btnMostrarPorcentagens.innerText = 'Ocultar ';
+      } else {
+        // Oculta as porcentagens definindo o texto como '0%'
+        meses.forEach(mes => {
+          document.getElementById(`porcentagem${mes}`).innerText = '0%';
+        });
+        btnMostrarPorcentagens.innerText = 'Mostrar ';
+      }
+    }
+    
 
     function fecharModal() {
       document.getElementById('myModal').style.display = 'none';
