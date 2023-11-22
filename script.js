@@ -238,3 +238,27 @@ let orcamentoTotal = 0;
         return 0;
       }
     }
+
+    function confirmarZerarTudo() {
+      // Exibe uma caixa de diálogo de confirmação
+      const confirmacao = window.confirm("Tem certeza de que deseja apagar todos os dados? Esta ação não pode ser desfeita.");
+    
+      // Se o usuário clicar em "OK" (true), então zere tudo
+      if (confirmacao) {
+        zerarTudo();
+      }
+    }
+    
+    function zerarTudo() {
+      // Reinicialize as variáveis
+      orcamentoTotal = 0;
+      orcamentoAtual = 0;
+      orcamentoPorMes = {};
+    
+      // Atualize a exibição no site
+      atualizarOrcamento();
+      atualizarPorcentagemTotal();
+    
+      // Salve os dados atualizados no armazenamento local
+      salvarDadosLocalStorage();
+    }

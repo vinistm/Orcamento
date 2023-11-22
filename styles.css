@@ -186,3 +186,17 @@ li{
     background-color: rgb(0, 116, 15);
     border-radius: 10px;
 }
+
+#btnZerarTudo{
+  display: flex;
+    font-size: 20px;
+    padding: 0%;
+    width: 10vw;
+    height: 5vh;
+    color: white;
+    border: none !important;
+        justify-content: center;
+    align-items: center;
+    background-color: rgb(116, 0, 0);
+    border-radius: 10px;
+}
