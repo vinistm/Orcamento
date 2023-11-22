@@ -31,6 +31,7 @@ let orcamentoTotal = 0;
       mesSelecionado = mes;
       document.body.classList.add('modal-open');
       document.getElementById('myModal').style.display = 'block';
+    
       if (!orcamentoPorMes[mes]) {
         orcamentoPorMes[mes] = {
           orcamentoMes: orcamentoTotal,
@@ -38,7 +39,7 @@ let orcamentoTotal = 0;
           itens: []
         };
       }
-
+    
       atualizarPorcentagemMes(mes);
       exibirItensDoMes(mes);
     }
@@ -97,6 +98,10 @@ let orcamentoTotal = 0;
       orcamentoAtual = parseFloat(localStorage.getItem('orcamentoAtual')) || 0;
       const orcamentoPorMesString = localStorage.getItem('orcamentoPorMes');
       orcamentoPorMes = orcamentoPorMesString ? JSON.parse(orcamentoPorMesString) : {};
+
+      console.log('orcamentoTotal:', orcamentoTotal);
+      console.log('orcamentoAtual:', orcamentoAtual);
+      console.log('orcamentoPorMes:', orcamentoPorMes);
     
       // Carregue os itens do armazenamento local
       const itensPorMesString = localStorage.getItem('itensPorMes');
@@ -146,6 +151,8 @@ let orcamentoTotal = 0;
         liModal.innerHTML = `${item.nome}: ${valorFormatado} (${porcentagemItem}%) <button onclick="excluirItem('${item.nome}')">Excluir</button>`;
         listaItensModal.appendChild(liModal);
       });
+
+      console.log('Itens do mês', mes, ':', orcamentoPorMes[mes].itens);
     }
     function alternarMostrarPorcentagens() {
       const btnMostrarPorcentagens = document.getElementById('btnMostrarPorcentagens');
@@ -170,7 +177,8 @@ let orcamentoTotal = 0;
     
 
     function fecharModal() {
-      document.getElementById('myModal').style.display = 'none';
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
     }
 
     function excluirItem(nomeItem) {
@@ -191,10 +199,20 @@ let orcamentoTotal = 0;
 
     function atualizarPorcentagemMes(mes) {
       if (orcamentoPorMes[mes]) {
-        const porcentagemMes = ((orcamentoPorMes[mes].orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2);
-        document.getElementById(`porcentagem${mes}`).innerText = porcentagemMes + '%';
+        const orcamentoAtualMes = orcamentoPorMes[mes].orcamentoAtualMes;
+        const orcamentoMes = orcamentoPorMes[mes].orcamentoMes;
+    
+        // Correção: Calcula a porcentagem com base no orcamentoTotal em vez do orcamentoMes
+        const porcentagemMes = orcamentoTotal > 0 ? ((orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2) : 0;
+    
+        // Garante que a porcentagem não seja negativa
+        const porcentagemNaoNegativa = Math.max(porcentagemMes, 0);
+    
+        document.getElementById(`porcentagem${mes}`).innerText = porcentagemNaoNegativa + '%';
       }
     }
+    
+    
     function atualizarOrcamento() {
       const orcamentoFormatado = orcamentoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       document.getElementById('orcamento').innerText = orcamentoFormatado;
@@ -255,6 +273,12 @@ let orcamentoTotal = 0;
       orcamentoAtual = 0;
       orcamentoPorMes = {};
     
+      // Exclua os itens em todos os meses
+      Object.keys(orcamentoPorMes).forEach(mes => {
+        orcamentoPorMes[mes].itens = [];
+        orcamentoPorMes[mes].orcamentoAtualMes = 0;
+      });
+    
       // Atualize a exibição no site
       atualizarOrcamento();
       atualizarPorcentagemTotal();
@@ -262,3 +286,4 @@ let orcamentoTotal = 0;
       // Salve os dados atualizados no armazenamento local
       salvarDadosLocalStorage();
     }
+    
