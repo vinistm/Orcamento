@@ -112,6 +112,14 @@ let orcamentoTotal = 0;
         // Atualize os itens do mês com os itens salvos
         orcamentoPorMes[mes].itens = itensPorMes[mes].itens;
       });
+    
+      // Certifique-se de que o orçamento atual não seja negativo
+      if (orcamentoAtual < 0) {
+        orcamentoAtual = 0;
+      }
+    
+      // Atualize a porcentagem total
+      atualizarPorcentagemTotal();
     }
 
     function compararMesesSelecionados() {
