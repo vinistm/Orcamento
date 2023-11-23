@@ -168,6 +168,11 @@ li{
   height: 40px;
   border-radius: 20px;
 }
+.compa:hover{
+  cursor: pointer;
+  background-color: #0b3f0e;
+  color: white;
+}
 
 #resultadoComparacao{
   font-size: 40px;
@@ -187,6 +192,11 @@ li{
     border-radius: 10px;
 }
 
+#btnMostrarPorcentagens:hover{
+  cursor: pointer;
+  background-color: #0b3f0e;
+}
+
 #btnZerarTudo{
   display: flex;
     font-size: 20px;
@@ -199,4 +209,8 @@ li{
     align-items: center;
     background-color: rgb(116, 0, 0);
     border-radius: 10px;
+}
+
+select:hover{
+  cursor: pointer;
 }

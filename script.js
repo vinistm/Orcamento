@@ -48,13 +48,10 @@ let orcamentoTotal = 0;
       const item = document.getElementById('item').value;
       let valorRaw = document.getElementById('valor').value;
     
-      // Remova caracteres não numéricos do valor
       valorRaw = valorRaw.replace(/[^\d.,-]/g, '');
     
-      // Substitua vírgulas por pontos para garantir a formatação correta como número
       valorRaw = valorRaw.replace(',', '.');
     
-      // Parse do valor para um número
       const valor = parseFloat(valorRaw) || 0;
     
       if (isNaN(valor)) {
@@ -103,7 +100,6 @@ let orcamentoTotal = 0;
       console.log('orcamentoAtual:', orcamentoAtual);
       console.log('orcamentoPorMes:', orcamentoPorMes);
     
-      // Carregue os itens do armazenamento local
       const itensPorMesString = localStorage.getItem('itensPorMes');
       const itensPorMes = itensPorMesString ? JSON.parse(itensPorMesString) : {};
       Object.keys(itensPorMes).forEach(mes => {
@@ -114,46 +110,38 @@ let orcamentoTotal = 0;
             itens: []
           };
         }
-        // Atualize os itens do mês com os itens salvos
         orcamentoPorMes[mes].itens = itensPorMes[mes].itens;
       });
     
-      // Certifique-se de que o orçamento atual não seja negativo
       if (orcamentoAtual < 0) {
         orcamentoAtual = 0;
       }
     
-      // Atualize a porcentagem total
       atualizarPorcentagemTotal();
     }
 
-    function compararMesesSelecionados() {
-      const mes1 = document.getElementById('mes1').value;
-      const mes2 = document.getElementById('mes2').value;
-    
-      const resultadoComparacao = calcularDiferencaPorcentagens(mes1, mes2);
-      document.getElementById('resultadoComparacao').innerText = resultadoComparacao + '%';
-    }
-    
+   
+   
   
-
     function exibirItensDoMes(mes) {
       const listaItensModal = document.getElementById('listaItensModal');
       listaItensModal.innerHTML = '';
-
+    
       const orcamentoMes = orcamentoPorMes[mes].orcamentoMes;
-
+    
       orcamentoPorMes[mes].itens.forEach(item => {
-        const valorFormatado = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const valorFormatado = item.valor.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
         const porcentagemItem = ((item.valor / orcamentoMes) * 100).toFixed(2);
-
+    
         const liModal = document.createElement('li');
-        liModal.innerHTML = `${item.nome}: ${valorFormatado} (${porcentagemItem}%) <button onclick="excluirItem('${item.nome}')">Excluir</button>`;
+        liModal.innerHTML = `${item.nome} : ${valorFormatado} (${porcentagemItem}%) <button onclick="excluirItem('${item.nome}')">Excluir</button>`;
         listaItensModal.appendChild(liModal);
       });
-
+    
       console.log('Itens do mês', mes, ':', orcamentoPorMes[mes].itens);
     }
+
+
     function alternarMostrarPorcentagens() {
       const btnMostrarPorcentagens = document.getElementById('btnMostrarPorcentagens');
       const meses = [
@@ -167,14 +155,19 @@ let orcamentoTotal = 0;
         });
         btnMostrarPorcentagens.innerText = 'Ocultar ';
       } else {
-        // Oculta as porcentagens definindo o texto como '0%'
         meses.forEach(mes => {
           document.getElementById(`porcentagem${mes}`).innerText = '0%';
         });
         btnMostrarPorcentagens.innerText = 'Mostrar ';
       }
     }
+    function compararMesesSelecionados() {
+      const mes1 = document.getElementById('mes1').value;
+      const mes2 = document.getElementById('mes2').value;
     
+      const resultadoComparacao = calcularDiferencaPorcentagens(mes1, mes2);
+      document.getElementById('resultadoComparacao').innerText = resultadoComparacao + '%';
+    }
 
     function fecharModal() {
       const modal = document.getElementById('myModal');
@@ -202,10 +195,8 @@ let orcamentoTotal = 0;
         const orcamentoAtualMes = orcamentoPorMes[mes].orcamentoAtualMes;
         const orcamentoMes = orcamentoPorMes[mes].orcamentoMes;
     
-        // Correção: Calcula a porcentagem com base no orcamentoTotal em vez do orcamentoMes
         const porcentagemMes = orcamentoTotal > 0 ? ((orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2) : 0;
     
-        // Garante que a porcentagem não seja negativa
         const porcentagemNaoNegativa = Math.max(porcentagemMes, 0);
     
         document.getElementById(`porcentagem${mes}`).innerText = porcentagemNaoNegativa + '%';
@@ -214,7 +205,7 @@ let orcamentoTotal = 0;
     
     
     function atualizarOrcamento() {
-      const orcamentoFormatado = orcamentoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const orcamentoFormatado = orcamentoTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
       document.getElementById('orcamento').innerText = orcamentoFormatado;
     
       Object.keys(orcamentoPorMes).forEach(mes => {
@@ -258,22 +249,18 @@ let orcamentoTotal = 0;
     }
 
     function confirmarZerarTudo() {
-      // Exibe uma caixa de diálogo de confirmação
       const confirmacao = window.confirm("Tem certeza de que deseja apagar todos os dados? Esta ação não pode ser desfeita.");
     
-      // Se o usuário clicar em "OK" (true), então zere tudo
       if (confirmacao) {
         zerarTudo();
       }
     }
     
     function zerarTudo() {
-      // Reinicialize as variáveis
       orcamentoTotal = 0;
       orcamentoAtual = 0;
       orcamentoPorMes = {};
     
-      // Exclua os itens em todos os meses
       Object.keys(orcamentoPorMes).forEach(mes => {
         orcamentoPorMes[mes].itens = [];
         orcamentoPorMes[mes].orcamentoAtualMes = 0;
