@@ -32,8 +32,9 @@ body {
   width: 80vw;
 }
   .modal input {
+    display: flex;
     margin-bottom: 10px;
-    padding: 5px;
+    
   }
 
   .modal button {
@@ -213,4 +214,7 @@ li{
 
 select:hover{
   cursor: pointer;
+}
+h2{
+  text-align: center;
 }

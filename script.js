@@ -31,7 +31,9 @@ let orcamentoTotal = 0;
       mesSelecionado = mes;
       document.body.classList.add('modal-open');
       document.getElementById('myModal').style.display = 'block';
-    
+      const mesSelecionadoTitulo = document.getElementById('mesSelecionadoTitulo');
+      mesSelecionadoTitulo.innerText = `${mes}`;
+      
       if (!orcamentoPorMes[mes]) {
         orcamentoPorMes[mes] = {
           orcamentoMes: orcamentoTotal,
@@ -45,11 +47,10 @@ let orcamentoTotal = 0;
     }
 
     function adicionarItem() {
-      const item = document.getElementById('item').value;
+      const categoria = document.getElementById('categoria').value;
       let valorRaw = document.getElementById('valor').value;
     
       valorRaw = valorRaw.replace(/[^\d.,-]/g, '');
-    
       valorRaw = valorRaw.replace(',', '.');
     
       const valor = parseFloat(valorRaw) || 0;
@@ -71,8 +72,7 @@ let orcamentoTotal = 0;
         }
     
         orcamentoPorMes[mesSelecionado].orcamentoAtualMes += valor;
-        orcamentoPorMes[mesSelecionado].itens.push({ nome: item, valor });
-        document.getElementById('item').value = '';
+        orcamentoPorMes[mesSelecionado].itens.push({ nome: categoria, valor });
         document.getElementById('valor').value = '';
     
         exibirItensDoMes(mesSelecionado);
@@ -273,4 +273,3 @@ let orcamentoTotal = 0;
       // Salve os dados atualizados no armazenamento local
       salvarDadosLocalStorage();
     }
-    
