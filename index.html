@@ -10,7 +10,11 @@
 
   <div class="header">
     <div class="orc">
-      <p>Orçamento</p> <span id="orcamento">0,00</span> 
+      <p>Orçamento Inicial</p> <span id="orcamento">0,00</span> 
+    </div>
+    <div class="orc-disponivel">
+      <p>Orçamento Disponível</p>
+      <span id="orcamentoDisponivel">0,00</span>
     </div>
       <div>
 <p>Porcentagem</p>
@@ -22,43 +26,43 @@
 
   <!-- Meses -->
   <div class="meses">
+    <div id='select1' title="" onmouseover="exibirItensTooltip('Janeiro')"> 
+      <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
+    </div>
 
-  
-  <div id='select'>
-    <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
-  </div>
-  <div id='select'>
+  <div id='select2' title="" onmouseover="exibirItensTooltip('Fevereiro')">
     <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
   </div>
-  <div id='select'>
+
+  <div id='select3' title="" onmouseover="exibirItensTooltip('Março')">
     <p onclick="abrirModal('Março')">Março - <span id="porcentagemMarço">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select4' title="" onmouseover="exibirItensTooltip('Abril')">
     <p onclick="abrirModal('Abril')">Abril - <span id="porcentagemAbril">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select5' title="" onmouseover="exibirItensTooltip('Maio')">
     <p onclick="abrirModal('Maio')">Maio - <span id="porcentagemMaio">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select6' title="" onmouseover="exibirItensTooltip('Junho')">
     <p onclick="abrirModal('Junho')">Junho - <span id="porcentagemJunho">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select7' title="" onmouseover="exibirItensTooltip('Julho')">
     <p onclick="abrirModal('Julho')">Julho - <span id="porcentagemJulho">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select8' title="" onmouseover="exibirItensTooltip('Agosto')">
     <p onclick="abrirModal('Agosto')">Agosto - <span id="porcentagemAgosto">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select9' title="" onmouseover="exibirItensTooltip('Setembro')">
     <p onclick="abrirModal('Setembro')">Setembro - <span id="porcentagemSetembro">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select10' title="" onmouseover="exibirItensTooltip('Outubro')">
     <p onclick="abrirModal('Outubro')">Outubro - <span id="porcentagemOutubro">0%</span></p>
   </div>
-  <div id='select'>
+  <div id='select11' title="" onmouseover="exibirItensTooltip('Novembro')">
     <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
   </div>
 
-  <div>
+  <div id='select12' title="" onmouseover="exibirItensTooltip('Dezembro')">
     <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
   </div>
  </div>
@@ -135,6 +139,7 @@
  
   
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

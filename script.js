@@ -41,7 +41,7 @@ let orcamentoTotal = 0;
           itens: []
         };
       }
-    
+      atualizarOrcamento();
       atualizarPorcentagemMes(mes);
       exibirItensDoMes(mes);
     }
@@ -80,6 +80,7 @@ let orcamentoTotal = 0;
         atualizarPorcentagemTotal();
         salvarItensLocalStorage();
         salvarDadosLocalStorage();
+        atualizarOrcamento();
       } else {
         alert("O valor do item excede o orçamento disponível.");
       }
@@ -118,6 +119,7 @@ let orcamentoTotal = 0;
       }
     
       atualizarPorcentagemTotal();
+      atualizarOrcamento();
     }
 
    
@@ -137,7 +139,7 @@ let orcamentoTotal = 0;
         liModal.innerHTML = `${item.nome} : ${valorFormatado} (${porcentagemItem}%) <button onclick="excluirItem('${item.nome}')">Excluir</button>`;
         listaItensModal.appendChild(liModal);
       });
-    
+      atualizarOrcamento();
       console.log('Itens do mês', mes, ':', orcamentoPorMes[mes].itens);
     }
 
@@ -172,6 +174,7 @@ let orcamentoTotal = 0;
     function fecharModal() {
       const modal = document.getElementById('myModal');
       modal.style.display = 'none';
+      
     }
 
     function excluirItem(nomeItem) {
@@ -195,18 +198,31 @@ let orcamentoTotal = 0;
         const orcamentoAtualMes = orcamentoPorMes[mes].orcamentoAtualMes;
         const orcamentoMes = orcamentoPorMes[mes].orcamentoMes;
     
-        const porcentagemMes = orcamentoTotal > 0 ? ((orcamentoAtualMes / orcamentoTotal) * 100).toFixed(2) : 0;
+        const porcentagemMes = orcamentoTotal > 0 ? ((orcamentoAtualMes / orcamentoMes) * 100).toFixed(2) : 0;
     
         const porcentagemNaoNegativa = Math.max(porcentagemMes, 0);
     
-        document.getElementById(`porcentagem${mes}`).innerText = porcentagemNaoNegativa + '%';
+        const porcentagemElement = document.getElementById(`porcentagem${mes}`);
+        porcentagemElement.innerText = porcentagemNaoNegativa + '%';
+    
+        if (porcentagemNaoNegativa <= 70) {
+          porcentagemElement.style.color = 'green';
+        } else if (porcentagemNaoNegativa > 70 && porcentagemNaoNegativa <= 90) {
+          porcentagemElement.style.color = 'orange';
+        } else {
+          porcentagemElement.style.color = 'red';
+        }
       }
     }
+    
     
     
     function atualizarOrcamento() {
       const orcamentoFormatado = orcamentoTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
       document.getElementById('orcamento').innerText = orcamentoFormatado;
+    
+      const orcamentoDisponivel = (orcamentoTotal - orcamentoAtual).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      document.getElementById('orcamentoDisponivel').innerText = orcamentoDisponivel;
     
       Object.keys(orcamentoPorMes).forEach(mes => {
         orcamentoPorMes[mes].orcamentoMes = orcamentoTotal;
@@ -255,6 +271,29 @@ let orcamentoTotal = 0;
         zerarTudo();
       }
     }
+    function exibirItensTooltip(mes) {
+      const itens = obterItensFormatados(mes);
+      document.getElementById('select1').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select2').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select3').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select4').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select5').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select6').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select7').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select8').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select9').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select10').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select11').title = `Contas de ${mes}:\n${itens}`;
+      document.getElementById('select12').title = `Contas de ${mes}:\n${itens}`;
+    }
+    
+    function obterItensFormatados(mes) {
+      if (orcamentoPorMes[mes]) {
+        const itens = orcamentoPorMes[mes].itens.map(item => `${item.nome}: ${item.valor.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`).join('\n');
+        return itens;
+      }
+      return 'Nenhum item registrado.';
+    }
     
     function zerarTudo() {
       orcamentoTotal = 0;
@@ -266,10 +305,13 @@ let orcamentoTotal = 0;
         orcamentoPorMes[mes].orcamentoAtualMes = 0;
       });
     
+    
       // Atualize a exibição no site
       atualizarOrcamento();
       atualizarPorcentagemTotal();
-    
+      atualizarOrcamento();
       // Salve os dados atualizados no armazenamento local
       salvarDadosLocalStorage();
     }
+
+ 
