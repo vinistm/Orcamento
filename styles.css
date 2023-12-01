@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Poppins:wght@400&display=swap');
 html{
-  background-color: #e9ffea;
+  background-color: #77c47b;
   height: 100vh;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -52,7 +52,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #e9ffea;
+    background-color: #c2f3c5;
     margin: auto;
     justify-content: center;
    
@@ -65,7 +65,8 @@ body {
     align-items: center;
      height: 16vh;
     background-color: white;
-    box-shadow: 2px 21px 5px 0px rgba(0, 0, 0, 0.966);
+    box-shadow: 20px 19px 16px 5px rgba(0,0,0,0.1);
+
   
   }
   .meses >div{
@@ -112,6 +113,7 @@ body {
         justify-content: center;
     align-items: center;
     background-color: orange;
+    box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
 }
 .orca:hover{
   background-color: #45a049;
@@ -155,24 +157,28 @@ li{
 }
 
 #formComparacao{
-  height: 20vw;
+  height: 11vw;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  box-shadow: 20px 19px 16px 5px rgba(0,0,0,0.1);
 }
 .compa{
   background-color: #45a049;
+  margin-top: 20px;
   border: none;
   width: 200px;
   height: 40px;
   border-radius: 20px;
+ 
 }
 .compa:hover{
   cursor: pointer;
   background-color: #0b3f0e;
   color: white;
+  box-shadow: 20px 19px 16px 5px rgba(0,0,0,0.1);
 }
 
 #resultadoComparacao{
@@ -191,6 +197,7 @@ li{
     align-items: center;
     background-color: rgb(0, 116, 15);
     border-radius: 10px;
+    box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
 }
 
 #btnMostrarPorcentagens:hover{
@@ -237,8 +244,13 @@ justify-content: space-evenly;
     background-color: rgb(0, 116, 15);
     border-radius: 10px;
     border-bottom: 10px;
+    box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
 }
 #excel:hover{
   cursor: pointer;
   background-color: #0b3f0e;
+}
+
+#select1, #select2, #select3, #select4, #select5, #select6, #select7, #select8, #select9, #select10, #select11, #select12{
+  box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
 }

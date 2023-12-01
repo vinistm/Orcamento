@@ -13,7 +13,7 @@ let orcamentoTotal = 0;
       orcamentoTotal = valor;
       atualizarOrcamento();
       atualizarPorcentagemTotal();
-      
+      atualizarPorcentagemMes(mes);
       salvarDadosLocalStorage();
     }
 
@@ -163,6 +163,8 @@ let orcamentoTotal = 0;
         btnMostrarPorcentagens.innerText = 'Mostrar ';
       }
     }
+
+
     function compararMesesSelecionados() {
       const mes1 = document.getElementById('mes1').value;
       const mes2 = document.getElementById('mes2').value;
@@ -226,8 +228,8 @@ let orcamentoTotal = 0;
     
       Object.keys(orcamentoPorMes).forEach(mes => {
         orcamentoPorMes[mes].orcamentoMes = orcamentoTotal;
+        atualizarPorcentagemMes(mes);
       });
-    
       atualizarPorcentagemTotal();
     }
 
