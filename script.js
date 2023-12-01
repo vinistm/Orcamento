@@ -305,7 +305,7 @@ let orcamentoTotal = 0;
         orcamentoPorMes[mes].orcamentoAtualMes = 0;
       });
     
-    
+   
       // Atualize a exibição no site
       atualizarOrcamento();
       atualizarPorcentagemTotal();
@@ -314,4 +314,51 @@ let orcamentoTotal = 0;
       salvarDadosLocalStorage();
     }
 
- 
+
+
+    function exportarParaExcel() {
+      const dadosExportacao = prepararDadosParaExportacao();
+    
+      const ws = XLSX.utils.json_to_sheet(dadosExportacao);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Orçamento');
+          XLSX.writeFile(wb, 'orcamento.xlsx');
+    }
+    
+    
+
+    function prepararDadosParaExportacao() {
+      const dadosExportacao = [];
+      const mesesDoAno = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+    
+      mesesDoAno.forEach(mes => {
+        const orcamentoMes = orcamentoPorMes[mes] ? orcamentoPorMes[mes].orcamentoMes : 0;
+        const orcamentoAtualMes = orcamentoPorMes[mes] ? orcamentoPorMes[mes].orcamentoAtualMes : 0;
+    
+        if (orcamentoPorMes[mes] && orcamentoPorMes[mes].itens) {
+          orcamentoPorMes[mes].itens.forEach(item => {
+            dadosExportacao.push({
+              'Orçamento Total': orcamentoMes,
+              'Mês': mes,
+              'Orçamento usado': orcamentoAtualMes,
+              'Item': item.nome,
+              'Valor': item.valor
+            });
+          });
+        } else {
+          dadosExportacao.push({
+            'Orçamento Total': orcamentoMes,
+            'Mês': mes,
+            'Orçamento usado': orcamentoAtualMes,
+            'Item': '',
+            'Valor': 0
+          });
+        }
+      });
+    
+      return dadosExportacao;
+    }
+    

@@ -20,7 +20,11 @@
 <p>Porcentagem</p>
        <span id="porcentagem">0%</span></div>
     <button class="orca" onclick="adicionarOrcamento()">+</button>
-    <button id="btnMostrarPorcentagens" class="mostrar" onclick="alternarMostrarPorcentagens()">Mostrar</button>
+    <div class="buttonss">
+
+      <button id="excel" onclick="exportarParaExcel()">Exportar para Excel</button>
+      <button id="btnMostrarPorcentagens" class="mostrar" onclick="alternarMostrarPorcentagens()">Mostrar</button>
+    </div>
 
   </div>
 
@@ -106,6 +110,8 @@
   </form>
 
   <button id="btnZerarTudo" onclick="confirmarZerarTudo()">Zerar Tudo</button>
+
+
   <div id="myModal" class="modal">
   <div class="modal-content">
 
@@ -139,6 +145,7 @@
  
   
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
   <script src="script.js"></script>
 </body>

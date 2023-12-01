@@ -218,3 +218,27 @@ select:hover{
 h2{
   text-align: center;
 }
+.buttonss{
+display: flex;
+flex-direction: column;
+height: 100%;
+justify-content: space-evenly;
+}
+#excel{
+  display: flex;
+    font-size: 20px;
+    padding: 0%;
+    width: 25vw;
+    height: 5vh;
+    color: white;
+    border: none !important;
+        justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 116, 15);
+    border-radius: 10px;
+    border-bottom: 10px;
+}
+#excel:hover{
+  cursor: pointer;
+  background-color: #0b3f0e;
+}
