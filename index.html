@@ -1,152 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orçamento App</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-
+  
   <div class="header">
-    <div class="orc">
-      <p>Orçamento Inicial</p> <span id="orcamento">0,00</span> 
-    </div>
-    <div class="orc-disponivel">
-      <p>Orçamento Disponível</p>
-      <span id="orcamentoDisponivel">0,00</span>
-    </div>
-      <div>
-<p>Porcentagem</p>
-       <span id="porcentagem">0%</span></div>
-    <button class="orca" onclick="adicionarOrcamento()">+</button>
-    <div class="buttonss">
+    <button id="btnZerarTudo" onclick="confirmarZerarTudo()">↻</button>
+        <div class="orc">
+            <p>Orçamento Inicial</p> <span id="orcamento">0,00</span>
+        </div>
+        <div class="orc-disponivel">
+            <p>Orçamento Disponível</p>
+            <span id="orcamentoDisponivel">0,00</span>
+        </div>
+        <div>
+            <p>Porcentagem</p>
+            <span id="porcentagem">0%</span>
+        </div>
+        <button class="orca" onclick="adicionarOrcamento()">+</button>
+        <div class="buttonss">
+            <button id="excel" onclick="exportarParaExcel()">Exportar para Excel</button>
+            <button id="btnMostrarPorcentagens" class="mostrar" onclick="alternarMostrarPorcentagens()">Mostrar</button>
+        </div>
 
-      <button id="excel" onclick="exportarParaExcel()">Exportar para Excel</button>
-      <button id="btnMostrarPorcentagens" class="mostrar" onclick="alternarMostrarPorcentagens()">Mostrar</button>
-    </div>
-
-  </div>
-
-  <!-- Meses -->
-  <div class="meses">
-    <div id='select1' title="" onmouseover="exibirItensTooltip('Janeiro')"> 
-      <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
     </div>
 
-  <div id='select2' title="" onmouseover="exibirItensTooltip('Fevereiro')">
-    <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
-  </div>
+    <!-- Meses -->
+    <div class="meses">
+        <div id='select1' title="" onmouseover="exibirItensTooltip('Janeiro')">
+            <p onclick="abrirModal('Janeiro')">Janeiro - <span id="porcentagemJaneiro">0%</span></p>
+        </div>
 
-  <div id='select3' title="" onmouseover="exibirItensTooltip('Março')">
-    <p onclick="abrirModal('Março')">Março - <span id="porcentagemMarço">0%</span></p>
-  </div>
-  <div id='select4' title="" onmouseover="exibirItensTooltip('Abril')">
-    <p onclick="abrirModal('Abril')">Abril - <span id="porcentagemAbril">0%</span></p>
-  </div>
-  <div id='select5' title="" onmouseover="exibirItensTooltip('Maio')">
-    <p onclick="abrirModal('Maio')">Maio - <span id="porcentagemMaio">0%</span></p>
-  </div>
-  <div id='select6' title="" onmouseover="exibirItensTooltip('Junho')">
-    <p onclick="abrirModal('Junho')">Junho - <span id="porcentagemJunho">0%</span></p>
-  </div>
-  <div id='select7' title="" onmouseover="exibirItensTooltip('Julho')">
-    <p onclick="abrirModal('Julho')">Julho - <span id="porcentagemJulho">0%</span></p>
-  </div>
-  <div id='select8' title="" onmouseover="exibirItensTooltip('Agosto')">
-    <p onclick="abrirModal('Agosto')">Agosto - <span id="porcentagemAgosto">0%</span></p>
-  </div>
-  <div id='select9' title="" onmouseover="exibirItensTooltip('Setembro')">
-    <p onclick="abrirModal('Setembro')">Setembro - <span id="porcentagemSetembro">0%</span></p>
-  </div>
-  <div id='select10' title="" onmouseover="exibirItensTooltip('Outubro')">
-    <p onclick="abrirModal('Outubro')">Outubro - <span id="porcentagemOutubro">0%</span></p>
-  </div>
-  <div id='select11' title="" onmouseover="exibirItensTooltip('Novembro')">
-    <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
-  </div>
+        <div id='select2' title="" onmouseover="exibirItensTooltip('Fevereiro')">
+            <p onclick="abrirModal('Fevereiro')">Fevereiro - <span id="porcentagemFevereiro">0%</span></p>
+        </div>
 
-  <div id='select12' title="" onmouseover="exibirItensTooltip('Dezembro')">
-    <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
-  </div>
- </div>
-  <!-- Adicione os outros meses aqui... -->
+        <div id='select3' title="" onmouseover="exibirItensTooltip('Março')">
+            <p onclick="abrirModal('Março')">Março - <span id="porcentagemMarço">0%</span></p>
+        </div>
+        <div id='select4' title="" onmouseover="exibirItensTooltip('Abril')">
+            <p onclick="abrirModal('Abril')">Abril - <span id="porcentagemAbril">0%</span></p>
+        </div>
+        <div id='select5' title="" onmouseover="exibirItensTooltip('Maio')">
+            <p onclick="abrirModal('Maio')">Maio - <span id="porcentagemMaio">0%</span></p>
+        </div>
+        <div id='select6' title="" onmouseover="exibirItensTooltip('Junho')">
+            <p onclick="abrirModal('Junho')">Junho - <span id="porcentagemJunho">0%</span></p>
+        </div>
+        <div id='select7' title="" onmouseover="exibirItensTooltip('Julho')">
+            <p onclick="abrirModal('Julho')">Julho - <span id="porcentagemJulho">0%</span></p>
+        </div>
+        <div id='select8' title="" onmouseover="exibirItensTooltip('Agosto')">
+            <p onclick="abrirModal('Agosto')">Agosto - <span id="porcentagemAgosto">0%</span></p>
+        </div>
+        <div id='select9' title="" onmouseover="exibirItensTooltip('Setembro')">
+            <p onclick="abrirModal('Setembro')">Setembro - <span id="porcentagemSetembro">0%</span></p>
+        </div>
+        <div id='select10' title="" onmouseover="exibirItensTooltip('Outubro')">
+            <p onclick="abrirModal('Outubro')">Outubro - <span id="porcentagemOutubro">0%</span></p>
+        </div>
+        <div id='select11' title="" onmouseover="exibirItensTooltip('Novembro')">
+            <p onclick="abrirModal('Novembro')">Novembro - <span id="porcentagemNovembro">0%</span></p>
+        </div>
 
-  <!-- Formulário para escolher os meses de comparação -->
+        <div id='select12' title="" onmouseover="exibirItensTooltip('Dezembro')">
+            <p onclick="abrirModal('Dezembro')">Dezembro - <span id="porcentagemDezembro">0%</span></p>
+        </div>
+    </div>
+
+    <!-- Formulário para escolher os meses de comparação -->
+    
+    
+    
+    
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        
+        <h2 id="mesSelecionadoTitulo"></h2>
+            <button class="modalfechar" onclick="fecharModal()">x</button>
+            <div class="itens-add">
+                <label for="categoria">Categoria:</label>
+                <select id="categoria">
+                    <option value="Employee Related Expenses">Employee Related Expenses</option>
+                    <option value="Travel & Transportation">Travel & Transportation</option>
+                    <option value="Professional Service">Professional Service</option>
+                    <option value="General Expenses">General Expenses</option>
+                    <option value="Depreciation & Amortization">Depreciation & Amortization</option>
+                    <option value="R&D">R&D</option>
+                    <option value="Other (income) expense">Other (income) expense</option>
+                </select>
+
+                <br>
+
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" placeholder="Valor do Item">
+                <br>
+                <button class="add" onclick="adicionarItem()">+</button>
+            </div>
+            <div>
+
+            </div>
+            <ul id="listaItensModal"></ul>
+        </div>
+    </div>
+
+
   <form id="formComparacao">
     <label for="mes1">Escolha o primeiro mês:</label>
     <select id="mes1" name="mes1">
       <option value="Janeiro">Janeiro</option>
-      <option value="Fevereiro">Fevereiro</option>
-      <option value="Março">Março</option>
-      <option value="Abril">Abril</option>
-      <option value="Maio">Maio</option>
-      <option value="Junho">Junho</option>
-      <option value="Julho">Julho</option>
-      <option value="Agosto">Agosto</option>
-      <option value="Setembro">Setembro</option>
-      <option value="Outubro">Outubro</option>
-      <option value="Novembro">Novembro</option>
-      <option value="Dezembro">Dezembro</option>
-    </select>
-    <label for="mes2">Escolha o segundo mês:</label>
-    <select id="mes2" name="mes2">
-      <option value="Janeiro">Janeiro</option>
-      <option value="Fevereiro">Fevereiro</option>
-      <option value="Março">Março</option>
-      <option value="Abril">Abril</option>
-      <option value="Maio">Maio</option>
-      <option value="Junho">Junho</option>
-      <option value="Julho">Julho</option>
-      <option value="Agosto">Agosto</option>
-      <option value="Setembro">Setembro</option>
-      <option value="Outubro">Outubro</option>
-      <option value="Novembro">Novembro</option>
-      <option value="Dezembro">Dezembro</option>
-    </select>
-
-    <button class="compa" type="button" onclick="compararMesesSelecionados()">Comparar Meses</button>
-    <div id="resultadoComparacao"></div>
-  </form>
-
-  <button id="btnZerarTudo" onclick="confirmarZerarTudo()">Zerar Tudo</button>
-
-
-  <div id="myModal" class="modal">
-  <div class="modal-content">
-
-    <h2 id="mesSelecionadoTitulo"></h2>
-    <button class="modalfechar" onclick="fecharModal()">x</button>
-    <div class="itens-add">
-      <label for="categoria">Categoria:</label>
-      <select id="categoria">
-        <option value="Employee Related Expenses">Employee Related Expenses</option>
-        <option value="Travel & Transportation">Travel & Transportation</option>
-        <option value="Professional Service">Professional Service</option>
-        <option value="General Expenses">General Expenses</option>
-        <option value="Depreciation & Amortization">Depreciation & Amortization</option>
-        <option value="R&D">R&D</option>
-        <option value="Other (income) expense">Other (income) expense</option>
+          <option value="Fevereiro">Fevereiro</option>
+          <option value="Março">Março</option>
+          <option value="Abril">Abril</option>
+          <option value="Maio">Maio</option>
+          <option value="Junho">Junho</option>
+          <option value="Julho">Julho</option>
+          <option value="Agosto">Agosto</option>
+          <option value="Setembro">Setembro</option>
+          <option value="Outubro">Outubro</option>
+          <option value="Novembro">Novembro</option>
+          <option value="Dezembro">Dezembro</option>
+        </select>
+        <label for="mes2">Escolha o segundo mês:</label>
+      <select id="mes2" name="mes2">
+          <option value="Janeiro">Janeiro</option>
+          <option value="Fevereiro">Fevereiro</option>
+          <option value="Março">Março</option>
+          <option value="Abril">Abril</option>
+          <option value="Maio">Maio</option>
+          <option value="Junho">Junho</option>
+          <option value="Julho">Julho</option>
+          <option value="Agosto">Agosto</option>
+          <option value="Setembro">Setembro</option>
+          <option value="Outubro">Outubro</option>
+          <option value="Novembro">Novembro</option>
+          <option value="Dezembro">Dezembro</option>
       </select>
-    
-      <br>
-    
-      <label for="valor">Valor:</label>
-      <input type="number" id="valor" placeholder="Valor do Item">
-      <br>
-      <button class="add" onclick="adicionarItem()">+</button>
+
+      
+      
+      
+      <button class="compa" type="button" onclick="compararMesesSelecionados()">Comparar Meses</button>
+      <div id="resultadoComparacao"></div>
+    </form>
+    <div id="modalComparacao" class="modal">
+      <div class="modal-content">
+        <h2>Comparação de Meses</h2>
+        <button class="modalfechar" onclick="fecharModalComparacao()">x</button>
+        <div id="conteudoModalComparacao"></div>
+      </div>
     </div>
-    <div>
 
-    </div>
-    <ul id="listaItensModal"></ul>
-  </div>
 
- 
-  
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

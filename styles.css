@@ -131,6 +131,7 @@ body {
     margin-left: 93%;
     background-color: red !important;
     color: black !important;
+    font-size: 20px;
 }
    
 .add{
@@ -207,18 +208,20 @@ li{
 
 #btnZerarTudo{
   display: flex;
-    font-size: 20px;
-    padding: 0%;
-    width: 10vw;
-    height: 5vh;
-    color: white;
+  align-items: center;
+  justify-content: center;
+    border-radius: 50%;
     border: none !important;
-        justify-content: center;
-    align-items: center;
-    background-color: rgb(116, 0, 0);
-    border-radius: 10px;
-}
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
 
+    
+}
+#btnZerarTudo:hover{
+     cursor: help;
+}
 select:hover{
   cursor: pointer;
 }
@@ -253,4 +256,10 @@ justify-content: space-evenly;
 
 #select1, #select2, #select3, #select4, #select5, #select6, #select7, #select8, #select9, #select10, #select11, #select12{
   box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
+}
+p{
+  display: flex;
+  flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
 }

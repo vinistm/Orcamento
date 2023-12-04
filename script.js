@@ -169,9 +169,31 @@ let orcamentoTotal = 0;
       const mes1 = document.getElementById('mes1').value;
       const mes2 = document.getElementById('mes2').value;
     
-      const resultadoComparacao = calcularDiferencaPorcentagens(mes1, mes2);
-      document.getElementById('resultadoComparacao').innerText = resultadoComparacao + '%';
+      const resultado = calcularDiferencaPorcentagens(mes1, mes2);
+    
+      const diferencaPorcentagens = resultado.diferencaPorcentagens;
+      const itensDiferenca = resultado.itensDiferenca;
+    
+      const resultadoComparacao = document.createElement('div');
+      resultadoComparacao.innerHTML = `<p>Diferença Total: ${diferencaPorcentagens}</p>`;
+    
+      // Exibir detalhes para cada item
+      for (const item in itensDiferenca) {
+        const detalhesItem = document.createElement('p');
+    
+        // Obter os gastos de cada mês
+        const gastoMes1 = itensDiferenca[item].mes1 ? itensDiferenca[item].mes1 : '0.00';
+        const gastoMes2 = itensDiferenca[item].mes2 ? itensDiferenca[item].mes2 : '0.00';
+    
+        detalhesItem.innerText = `${item}: ${mes1} - ${gastoMes1} (${itensDiferenca[item].porcentagemMes1}), ${mes2} - ${gastoMes2} (${itensDiferenca[item].porcentagemMes2}) - Diferença: ${itensDiferenca[item].diferenca}`;
+        resultadoComparacao.appendChild(detalhesItem);
+      }
+    
+      // Abra o modal de comparação com os resultados
+      abrirModalComparacao(resultadoComparacao.innerHTML);
     }
+    
+    
 
     function fecharModal() {
       const modal = document.getElementById('myModal');
@@ -258,13 +280,82 @@ let orcamentoTotal = 0;
       if (orcamentoPorMes[mes1] && orcamentoPorMes[mes2]) {
         const porcentagemMes1 = (orcamentoPorMes[mes1].orcamentoAtualMes / orcamentoPorMes[mes1].orcamentoMes) * 100;
         const porcentagemMes2 = (orcamentoPorMes[mes2].orcamentoAtualMes / orcamentoPorMes[mes2].orcamentoMes) * 100;
-
+    
         const diferencaPorcentagens = (porcentagemMes2 - porcentagemMes1).toFixed(2);
-        return diferencaPorcentagens;
+    
+        const itensDiferenca = {};
+    
+    
+        orcamentoPorMes[mes1].itens.forEach(itemMes1 => {
+          const nomeItem = itemMes1.nome;
+          const valorItemMes1 = itemMes1.valor;
+    
+       
+          const itemMes2 = orcamentoPorMes[mes2].itens.find(item => item.nome === nomeItem);
+    
+          if (itemMes2) {
+       
+            const porcentagemItemMes1 = (valorItemMes1 / orcamentoPorMes[mes1].orcamentoMes) * 100;
+            const porcentagemItemMes2 = (itemMes2.valor / orcamentoPorMes[mes2].orcamentoMes) * 100;
+    
+       
+            const diferencaItem = (porcentagemItemMes2 - porcentagemItemMes1).toFixed(2);
+    
+            itensDiferenca[nomeItem] = {
+              porcentagemMes1: porcentagemItemMes1.toFixed(2) + '%',
+              porcentagemMes2: porcentagemItemMes2.toFixed(2) + '%',
+              diferenca: diferencaItem + '%',
+              mes1: valorItemMes1.toFixed(2),
+              mes2: itemMes2.valor.toFixed(2),
+            };
+          } else {
+            // O item existe apenas no mes1
+            const porcentagemItemMes1 = (valorItemMes1 / orcamentoPorMes[mes1].orcamentoMes) * 100;
+    
+            itensDiferenca[nomeItem] = {
+              porcentagemMes1: porcentagemItemMes1.toFixed(2) + '%',
+              porcentagemMes2: '0.00%',
+              diferenca: porcentagemItemMes1.toFixed(2) + '%',
+              mes1: valorItemMes1.toFixed(2),
+              mes2: '0.00',
+            };
+          }
+        });
+    
+   
+        orcamentoPorMes[mes2].itens.forEach(itemMes2 => {
+          const nomeItem = itemMes2.nome;
+    
+        
+          if (!itensDiferenca[nomeItem]) {
+            const valorItemMes2 = itemMes2.valor;
+    
+  
+            const porcentagemItemMes2 = (valorItemMes2 / orcamentoPorMes[mes2].orcamentoMes) * 100;
+    
+            itensDiferenca[nomeItem] = {
+              porcentagemMes1: '0.00%',
+              porcentagemMes2: porcentagemItemMes2.toFixed(2) + '%',
+              diferenca: (-porcentagemItemMes2).toFixed(2) + '%',
+              mes1: '0.00',
+              mes2: valorItemMes2.toFixed(2),
+            };
+          }
+        });
+    
+        return {
+          diferencaPorcentagens: diferencaPorcentagens + '%',
+          itensDiferenca: itensDiferenca
+        };
       } else {
-        return 0;
+        return {
+          diferencaPorcentagens: '0.00%',
+          itensDiferenca: {}
+        };
       }
     }
+    
+    
 
     function confirmarZerarTudo() {
       const confirmacao = window.confirm("Tem certeza de que deseja apagar todos os dados? Esta ação não pode ser desfeita.");
@@ -363,4 +454,17 @@ let orcamentoTotal = 0;
     
       return dadosExportacao;
     }
+
+    function abrirModalComparacao(conteudo) {
+      document.body.classList.add('modal-open');
+      const modalComparacao = document.getElementById('modalComparacao');
+      modalComparacao.style.display = 'block';
+      const conteudoModalComparacao = document.getElementById('conteudoModalComparacao');
+      conteudoModalComparacao.innerHTML = conteudo;
+    }
     
+    function fecharModalComparacao() {
+      document.body.classList.remove('modal-open');
+      const modalComparacao = document.getElementById('modalComparacao');
+      modalComparacao.style.display = 'none';
+    }
