@@ -270,6 +270,7 @@ justify-content: space-evenly;
 
 #select1, #select2, #select3, #select4, #select5, #select6, #select7, #select8, #select9, #select10, #select11, #select12{
   box-shadow: 4px 9px 11px 0px rgba(0,0,0,0.1);
+  border-radius: 10px;
 }
 p{
   display: flex;
