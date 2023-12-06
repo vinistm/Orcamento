@@ -8,9 +8,12 @@ let orcamentoTotal = 0;
     atualizarPorcentagemTotal();
     adicionarEventosInput();
 
+
     function adicionarOrcamento() {
-      const valor = parseFloat(prompt("Informe o valor do orçamento:")) || 0;
-      orcamentoTotal = valor;
+     
+      const modalNovoOrcamento = document.getElementById('modalNovoOrcamento');
+      modalNovoOrcamento.style.display = 'block';
+      document.body.classList.add('modal-open');
       atualizarOrcamento();
       atualizarPorcentagemTotal();
       atualizarPorcentagemMes(mes);
@@ -177,11 +180,9 @@ let orcamentoTotal = 0;
       const resultadoComparacao = document.createElement('div');
       resultadoComparacao.innerHTML = `<p>Diferença Total: ${diferencaPorcentagens}</p>`;
     
-      // Exibir detalhes para cada item
       for (const item in itensDiferenca) {
         const detalhesItem = document.createElement('p');
     
-        // Obter os gastos de cada mês
         const gastoMes1 = itensDiferenca[item].mes1 ? itensDiferenca[item].mes1 : '0.00';
         const gastoMes2 = itensDiferenca[item].mes2 ? itensDiferenca[item].mes2 : '0.00';
     
@@ -189,7 +190,6 @@ let orcamentoTotal = 0;
         resultadoComparacao.appendChild(detalhesItem);
       }
     
-      // Abra o modal de comparação com os resultados
       abrirModalComparacao(resultadoComparacao.innerHTML);
     }
     
@@ -309,7 +309,6 @@ let orcamentoTotal = 0;
               mes2: itemMes2.valor.toFixed(2),
             };
           } else {
-            // O item existe apenas no mes1
             const porcentagemItemMes1 = (valorItemMes1 / orcamentoPorMes[mes1].orcamentoMes) * 100;
     
             itensDiferenca[nomeItem] = {
@@ -399,11 +398,9 @@ let orcamentoTotal = 0;
       });
     
    
-      // Atualize a exibição no site
       atualizarOrcamento();
       atualizarPorcentagemTotal();
       atualizarOrcamento();
-      // Salve os dados atualizados no armazenamento local
       salvarDadosLocalStorage();
     }
 
@@ -467,4 +464,37 @@ let orcamentoTotal = 0;
       document.body.classList.remove('modal-open');
       const modalComparacao = document.getElementById('modalComparacao');
       modalComparacao.style.display = 'none';
+    }
+
+    function adicionarNovoOrcamento() {
+      const novoOrcamentoInput = document.getElementById('novoOrcamento');
+      const novoOrcamentoValor = parseFloat(novoOrcamentoInput.value) || 0;
+    
+      if (isNaN(novoOrcamentoValor) || novoOrcamentoValor < 0) {
+        alert("Por favor, insira um valor válido para o novo orçamento.");
+        return;
+      }
+    
+      orcamentoTotal = novoOrcamentoValor;
+      atualizarOrcamento();
+      atualizarPorcentagemTotal();
+      atualizarPorcentagemMes(mesSelecionado);
+      salvarDadosLocalStorage();
+    
+  
+      fecharModalNovoOrcamento();
+    }
+    
+    function fecharModalNovoOrcamento() {
+      const modalNovoOrcamento = document.getElementById('modalNovoOrcamento');
+      modalNovoOrcamento.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      
+    }
+    
+   
+    function fecharModalOrca() {
+      const modal = document.getElementById('modalNovoOrcamento');
+      modal.style.display = 'none';
+      
     }
